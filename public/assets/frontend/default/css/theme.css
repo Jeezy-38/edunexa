@@ -1,0 +1,105 @@
+/* ===== Header tools: language pill + theme toggle ===== */
+.header-tools .lng-pill{display:flex;align-items:center;gap:6px;margin:0;padding:0 8px 0 12px;height:38px;border:1px solid rgba(107,115,133,.28);border-radius:999px;background:transparent;transition:border-color .2s,box-shadow .2s}
+.header-tools .lng-pill:hover,.header-tools .lng-pill:focus-within{border-color:var(--color-1);box-shadow:0 0 0 3px rgba(47,87,239,.12)}
+.header-tools .lng-pill i{font-size:13px;color:var(--color-1)}
+.header-tools .lng-pill select{appearance:none;-webkit-appearance:none;border:0;outline:0;background:transparent;font:500 13px/1 var(--font-family);color:var(--color-2);padding:0 14px 0 0;cursor:pointer;max-width:96px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%236b7385' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0 center}
+.header-tools .lng-pill select option{color:#192335;background:#fff}
+.theme-toggle{width:38px;height:38px;border-radius:50%;border:1px solid rgba(107,115,133,.28);background:transparent;color:var(--color-2);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .3s,background .2s,border-color .2s;padding:0}
+.theme-toggle:hover{border-color:var(--color-1);background:rgba(47,87,239,.08);transform:rotate(18deg)}
+.theme-toggle .icon-sun{display:none;color:#fbbf24}
+.theme-toggle .icon-moon{color:var(--color-1)}
+[data-bs-theme=dark] .theme-toggle .icon-sun{display:inline}
+[data-bs-theme=dark] .theme-toggle .icon-moon{display:none}
+@media (max-width:575.98px){.header-tools{display:none!important}.offcanvas .header-tools{display:flex!important}}
+
+/* ===== PWA install banner ===== */
+.pwa-install{position:fixed;right:20px;bottom:20px;left:auto;z-index:2000;display:flex;align-items:center;gap:12px;width:min(380px,calc(100% - 24px));padding:12px 14px;border-radius:18px;background:#fff;color:#192335;box-shadow:0 18px 50px rgba(15,23,42,.25);border:1px solid rgba(47,87,239,.15);animation:pwaUp .4s ease}
+.pwa-install[hidden]{display:none}
+.pwa-install img{border-radius:10px}
+.pwa-install-text{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.3}
+.pwa-install-text strong{font-size:14px}
+.pwa-install-text span{font-size:12px;opacity:.7}
+.pwa-btn{border:0;border-radius:999px;padding:9px 18px;font:600 13px var(--font-family);color:#fff;background:linear-gradient(135deg,#2f57ef,#7b61ff);cursor:pointer}
+.pwa-close{border:0;background:transparent;font-size:22px;line-height:1;color:inherit;opacity:.5;cursor:pointer}
+@keyframes pwaUp{from{opacity:0;transform:translate(24px,16px) scale(.96)}to{opacity:1;transform:translate(0,0) scale(1)}}
+@media (max-width:575.98px){.pwa-install{right:12px;left:12px;bottom:12px;width:auto}}
+@media (display-mode:standalone){body{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);-webkit-tap-highlight-color:transparent}.pwa-install{display:none!important}}
+
+/* ===== Dark mode ===== */
+[data-bs-theme=dark]{
+  --bg-white:#0f172a;--text-color:#a9b4c8;--color-2:#e5e9f2;--color-black:#f1f5f9;
+  --box-shadow:0 8px 24px rgba(0,0,0,.35);--box-shadow-2:0 6px 18px rgba(0,0,0,.3);
+  --bs-body-bg:#0f172a;--bs-body-color:#cbd5e1;color-scheme:dark;
+}
+[data-bs-theme=dark] body{background:#0f172a;color:#cbd5e1}
+[data-bs-theme=dark] h1,[data-bs-theme=dark] h2,[data-bs-theme=dark] h3,[data-bs-theme=dark] h4,[data-bs-theme=dark] h5,[data-bs-theme=dark] h6,
+[data-bs-theme=dark] .title,[data-bs-theme=dark] .text-dark{color:#f1f5f9!important}
+[data-bs-theme=dark] p,[data-bs-theme=dark] li,[data-bs-theme=dark] label,[data-bs-theme=dark] .text-muted{color:#a9b4c8}
+[data-bs-theme=dark] a{--bs-link-color:#8ea6ff}
+[data-bs-theme=dark] .header-area,[data-bs-theme=dark] .sub-header,[data-bs-theme=dark] .Ecard,[data-bs-theme=dark] .Userprofile .dropmenu-end,
+[data-bs-theme=dark] .child_category_menu,[data-bs-theme=dark] .main-mega-menu,[data-bs-theme=dark] .course-sideBar,[data-bs-theme=dark] .fDetails-tab,
+[data-bs-theme=dark] .lms-content-card,[data-bs-theme=dark] .my-panel,[data-bs-theme=dark] .ps-box,[data-bs-theme=dark] .sidebar,[data-bs-theme=dark] .single-category,
+[data-bs-theme=dark] .single-details,[data-bs-theme=dark] .single-feature,[data-bs-theme=dark] .single-motion,[data-bs-theme=dark] .tab-list li.active,
+[data-bs-theme=dark] .testimonial-des,[data-bs-theme=dark] .tutor-single-service,[data-bs-theme=dark] .us-btn,[data-bs-theme=dark] .message-input,
+[data-bs-theme=dark] .message-list li p,[data-bs-theme=dark] .message-send-option,[data-bs-theme=dark] .page-link,[data-bs-theme=dark] .g-btn,
+[data-bs-theme=dark] .lms-btn-secondary,[data-bs-theme=dark] .ol-btn-light,[data-bs-theme=dark] .over-text,[data-bs-theme=dark] .count-files,
+[data-bs-theme=dark] .floating-searchbar form>button,[data-bs-theme=dark] .icon-box-md,[data-bs-theme=dark] .upload-image-btn,[data-bs-theme=dark] .eTable thead tr th,
+[data-bs-theme=dark] .tutor-service-modal .modal-content,[data-bs-theme=dark] .instructor-video-modal .modal-header,[data-bs-theme=dark] .offcanvas,
+[data-bs-theme=dark] .card,[data-bs-theme=dark] .modal-content,[data-bs-theme=dark] .dropdown-menu{background-color:#1e293b!important;color:#cbd5e1;border-color:#334155}
+[data-bs-theme=dark] .development-hero-section1,[data-bs-theme=dark] .yoga-benefit-area,[data-bs-theme=dark] .yoga-benefit-image,[data-bs-theme=dark] .custome-height,
+[data-bs-theme=dark] .bg-white,[data-bs-theme=dark] .bg-light{background-color:#0f172a!important}
+[data-bs-theme=dark] .header-area{border-bottom:1px solid #1e293b}
+[data-bs-theme=dark] .form-control,[data-bs-theme=dark] .form-select,[data-bs-theme=dark] input,[data-bs-theme=dark] textarea,[data-bs-theme=dark] select,
+[data-bs-theme=dark] .nice-select{background-color:#0f172a;color:#e5e9f2;border-color:#334155}
+[data-bs-theme=dark] .nice-select .list{background:#1e293b}
+[data-bs-theme=dark] .nice-select .option:hover,[data-bs-theme=dark] .nice-select .option.focus,[data-bs-theme=dark] .nice-select .option.selected.focus{background:#334155}
+[data-bs-theme=dark] ::placeholder{color:#64748b}
+[data-bs-theme=dark] hr,[data-bs-theme=dark] .border,[data-bs-theme=dark] .table>:not(caption)>*>*{border-color:#334155!important}
+[data-bs-theme=dark] .primary-menu a,[data-bs-theme=dark] .dropdown-item,[data-bs-theme=dark] .btn-toggle-list{color:#cbd5e1}
+[data-bs-theme=dark] .dropdown-item:hover,[data-bs-theme=dark] .btn-toggle-list:hover{background:#334155;color:#fff}
+[data-bs-theme=dark] .header-tools .lng-pill,[data-bs-theme=dark] .theme-toggle{border-color:#475569}
+[data-bs-theme=dark] .header-tools .lng-pill select{color:#e5e9f2}
+[data-bs-theme=dark] .toggle-bar{color:#e5e9f2!important}
+[data-bs-theme=dark] .pwa-install{background:#1e293b;color:#e5e9f2;border-color:#334155}
+[data-bs-theme=dark] .btn-close{filter:invert(1) grayscale(100%) brightness(200%)}
+[data-bs-theme=dark] img:not([src*="logo"]):not(.header-light-logo){filter:brightness(.92)}
+[data-bs-theme=dark] svg path[stroke="#192335"]{stroke:#cbd5e1}
+[data-bs-theme=dark] svg path[fill="#192335"]{fill:#cbd5e1}
+[data-bs-theme=dark] svg path[fill="#6B7385"]{fill:#a9b4c8}
+[data-bs-theme=dark] footer,[data-bs-theme=dark] .footer-area{background:#0b1222!important}
+
+/* dark fixes: feature cards, menu arrow */
+[data-bs-theme=dark] .ps-single-wrap h4,[data-bs-theme=dark] .ps-single-wrap p{color:#fff!important}
+[data-bs-theme=dark] .ps-single-wrap p{opacity:.9}
+[data-bs-theme=dark] .ps-single-wrap:hover{background-color:#0b1222}
+[data-bs-theme=dark] .primary-menu .have-mega-menu .menu-parent-a::after{background:transparent;border-color:#a9b4c8 transparent transparent transparent}
+
+/* dark: remove light halos (#eee glows) */
+[data-bs-theme=dark] .pr-wrap,[data-bs-theme=dark] .single-feature,[data-bs-theme=dark] .Ecard,[data-bs-theme=dark] .testimonial-border,
+[data-bs-theme=dark] .over-text,[data-bs-theme=dark] .sidebar,[data-bs-theme=dark] .single-motion,[data-bs-theme=dark] .my-panel,[data-bs-theme=dark] .course-sideBar,
+[data-bs-theme=dark] .privacy-policy,[data-bs-theme=dark] .entry_panel,[data-bs-theme=dark] .fDetails-tab,[data-bs-theme=dark] .ps-box,[data-bs-theme=dark] .child_category_menu{box-shadow:0 10px 30px rgba(0,0,0,.4)!important}
+[data-bs-theme=dark] .gradient,[data-bs-theme=dark] .eBtn.gradient{box-shadow:0 6px 18px rgba(47,87,239,.35)!important}
+[data-bs-theme=dark] .banner-btn .learn-btn i{background:#1e293b;box-shadow:none}
+
+/* dark: translucent light sections, show-more fade, icon bubbles */
+[data-bs-theme=dark] .testimonials-wrapper{background-color:rgba(255,255,255,.03)!important}
+[data-bs-theme=dark] .elips img{opacity:.35}
+[data-bs-theme=dark] .overlay-content.show-more p:last-child{background:linear-gradient(180deg,rgba(30,41,59,0) 0%,#1e293b 50%)!important}
+[data-bs-theme=dark] .overlay-content .show-more-btn,[data-bs-theme=dark] .overlay-content a{color:#8ea6ff}
+[data-bs-theme=dark] .skil-content ul li .svg{background:#1e293b!important;box-shadow:0 0 0 1px #334155}
+[data-bs-theme=dark] .btn-whitelight{background:#1e293b;color:#e5e9f2;box-shadow:none}
+[data-bs-theme=dark] .user-slider .owl-nav .owl-prev,[data-bs-theme=dark] .user-slider .owl-nav .owl-next{box-shadow:0 6px 16px rgba(0,0,0,.4)}
+
+/* dark: more light-background components */
+[data-bs-theme=dark] .tab-list ul,[data-bs-theme=dark] .single-details,[data-bs-theme=dark] .player-left h4,[data-bs-theme=dark] .entry-player h4 i,
+[data-bs-theme=dark] .fDetails-tab .nav-pills .nav-link,[data-bs-theme=dark] .message-left .contact:hover,[data-bs-theme=dark] .message-left .contact.active,
+[data-bs-theme=dark] .ins-rights p,[data-bs-theme=dark] .home1-download-section,[data-bs-theme=dark] .programming-ebook-section,[data-bs-theme=dark] .bg-color-e9f6ff,
+[data-bs-theme=dark] .sub1-form-control,[data-bs-theme=dark] .sub1-form-control:focus,[data-bs-theme=dark] .testimonial-des::before,
+[data-bs-theme=dark] .gSearch-icon:after{background:#1e293b!important;color:#cbd5e1}
+[data-bs-theme=dark] .fDetails-tab .nav-pills .nav-link.active{background:linear-gradient(135deg,#2f57ef,#7b61ff)!important;color:#fff}
+[data-bs-theme=dark] .contacts::-webkit-scrollbar-track,[data-bs-theme=dark] .custome-height::-webkit-scrollbar-track{background:#0f172a}
+
+/* dark: one consistent background (no color bands) */
+[data-bs-theme=dark] body,[data-bs-theme=dark] .footer-area,[data-bs-theme=dark] footer{background-color:#0f172a!important}
+[data-bs-theme=dark] .footer-area{border-top:1px solid #1e293b}
+[data-bs-theme=dark] .footer-area .container>.row ~ *{border-color:#1e293b!important}

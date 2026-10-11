@@ -19,9 +19,12 @@ use App\Http\Controllers\student\QuizController;
 use App\Http\Controllers\student\ReviewController;
 use App\Http\Controllers\student\WishListController;
 use App\Http\Controllers\student\TutorBookingController;
+use App\Http\Controllers\student\AiTutorController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
+    // AI Tutor route
+    Route::post('ai-tutor/ask', [AiTutorController::class, 'ask'])->name('ai.tutor.ask');
     // my profile routes
     Route::controller(MyProfileController::class)->group(function () {
         Route::get('my-profile', 'index')->name('my.profile');

@@ -390,3 +390,61 @@
 .max-w-auto{
     max-width: auto;
 }
+
+/* --- Edunexa AI Tutor & Classroom Study Tools --- */
+.edunexa-ai-tutor-container {
+    border: 1px solid #e2e8f0;
+    transition: box-shadow 0.2s ease;
+}
+
+.edunexa-ai-tutor-container:hover {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03) !important;
+}
+
+.edunexa-ai-chat-body {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 #fafbfd;
+}
+
+.edunexa-ai-chat-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.edunexa-ai-chat-body::-webkit-scrollbar-track {
+    background: #fafbfd;
+}
+
+.edunexa-ai-chat-body::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 6px;
+}
+
+.edunexa-ai-chip {
+    background-color: #ffffff;
+    color: #334155;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border-color: #e2e8f0;
+}
+
+.edunexa-ai-chip:hover {
+    background-color: #eff6ff;
+    color: #2563eb;
+    border-color: #bfdbfe;
+    transform: translateY(-1px);
+}
+
+.edunexa-ai-bubble {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.lesson-notes-body {
+    color: #334155;
+}
+
+.lesson-notes-body img {
+    max-width: 100%;
+    border-radius: 8px;
+    height: auto;
+}

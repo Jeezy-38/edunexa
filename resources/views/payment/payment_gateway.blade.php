@@ -22,8 +22,18 @@
                             <img width="100px" src="{{ get_image('assets/payment/' . $payment_gateway->identifier . '.png') }}" alt="" />
                         </div>
                         <div class="info">
-                            <p class="card_no">{{ $payment_gateway->title }}</p>
-                            <p class="card_date"></p>
+                            <p class="card_no fw-bold mb-0">{{ $payment_gateway->title }}</p>
+                            @if ($payment_gateway->identifier == 'offline')
+                                <p class="card_date mb-0 text-success fw-semibold" style="font-size: 11px;">
+                                    <i class="fa-solid fa-mobile-screen-button me-1"></i> M-Pesa &bull; Tigo Pesa &bull; Airtel &bull; Benki
+                                </p>
+                            @elseif ($payment_gateway->identifier == 'flutterwave')
+                                <p class="card_date mb-0 text-primary fw-semibold" style="font-size: 11px;">
+                                    <i class="fa-solid fa-credit-card me-1"></i> M-Pesa &bull; Airtel &bull; Visa &bull; Mastercard
+                                </p>
+                            @else
+                                <p class="card_date"></p>
+                            @endif
                         </div>
                     </div>
                 </div>

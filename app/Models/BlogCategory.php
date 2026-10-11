@@ -14,8 +14,4 @@ class BlogCategory extends Model
         'subtitle',
         'slug',
     ];
-
-    public static function get()
-    {
-    }
 }

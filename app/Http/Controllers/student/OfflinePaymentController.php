@@ -43,13 +43,15 @@ class OfflinePaymentController extends Controller
 
         $control_number = OfflinePayment::controlNumberFor($payment_details);
 
-        $offline_payment['user_id']      = auth()->user()->id;
-        $offline_payment['item_type']    = $request->item_type;
-        $offline_payment['items']        = json_encode($item_id_arr);
-        $offline_payment['tax']          = $payment_details['tax'];
-        $offline_payment['total_amount'] = $payment_details['payable_amount'];
-        $offline_payment['doc']          = $path;
-        $offline_payment['coupon'] = $payment_details['coupon'] ?? null;
+        $offline_payment['user_id']        = auth()->user()->id;
+        $offline_payment['item_type']      = $request->item_type;
+        $offline_payment['items']          = json_encode($item_id_arr);
+        $offline_payment['tax']            = $payment_details['tax'];
+        $offline_payment['total_amount']   = $payment_details['payable_amount'];
+        $offline_payment['phone_on']       = $request->phone_on;
+        $offline_payment['bank_no']        = $request->bank_no;
+        $offline_payment['doc']            = $path;
+        $offline_payment['coupon']         = $payment_details['coupon'] ?? null;
         $offline_payment['control_number'] = $control_number;
 
         // insert offline payment history

@@ -65,6 +65,16 @@
                                         {{ $tags ? implode(', ', $tags) : '' }}
                                     </li>
                                 @endif
+                                @php
+                                    $words = str_word_count(strip_tags($blog_details->description ?? ''));
+                                    $readMinutes = max(1, ceil($words / 160));
+                                    $blogShareUrl = urlencode(route('blog.details', $blog_details->slug));
+                                    $blogShareMsg = urlencode("Soma mwongozo huu kutoka Edunexa: " . $blog_details->title . " \n");
+                                @endphp
+                                <li>
+                                    <i class="fa-regular fa-clock text-primary me-1"></i>
+                                    <span>{{ $readMinutes }} {{ get_phrase('dakika za kusoma') }}</span>
+                                </li>
                                 <li>
                                     <img class="pro-20" src="{{ asset('assets/frontend/default/image/elearn2.png') }}" alt="blog-comment">
                                     {{ $total_comments }}
@@ -78,8 +88,43 @@
 
 
                         <div class="blog-f-image">
-                            <img src="{{ get_image($blog_details->banner) }}" alt="blog-thumbnail">
-                            <div class="description description-style">{!! removeScripts($blog_details->description) !!}</div>
+                            <img src="{{ get_image($blog_details->banner) }}" alt="blog-thumbnail" class="rounded-3 shadow-2xs mb-4">
+                            <div class="description description-style" style="font-size: 16px; line-height: 1.8; color: #334155;">
+                                {!! removeScripts($blog_details->description) !!}
+                            </div>
+
+                            <!-- Social Sharing & Engagement Bar -->
+                            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 p-3 my-4 bg-light rounded-3 border">
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="text-muted fw-semibold small">{{ get_phrase('Shiriki Makala Hii:') }}</span>
+                                    <a href="https://api.whatsapp.com/send?text={{ $blogShareMsg }}{{ $blogShareUrl }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-success rounded-pill px-3 py-1 d-inline-flex align-items-center gap-1 shadow-2xs" style="font-size: 12px;">
+                                        <i class="fa-brands fa-whatsapp"></i>
+                                        <span>WhatsApp</span>
+                                    </a>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ $blogShareUrl }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary rounded-pill px-2 py-1 shadow-2xs" style="font-size: 12px;">
+                                        <i class="fa-brands fa-facebook-f"></i>
+                                    </a>
+                                    <a href="https://www.linkedin.com/shareArticle?url={{ $blogShareUrl }}&title={{ urlencode($blog_details->title) }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-info rounded-pill px-2 py-1 shadow-2xs" style="font-size: 12px;">
+                                        <i class="fa-brands fa-linkedin-in"></i>
+                                    </a>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    @auth
+                                        @php
+                                            $is_liked = App\Models\BlogLike::where('blog_id', $blog_details->id)
+                                                ->where('user_id', auth()->user()->id)
+                                                ->first();
+                                        @endphp
+                                        <div class="d-flex align-items-center gap-1">
+                                            <div class="like-svg cursor-pointer @if ($is_liked) active @endif" style="font-size: 18px;">
+                                                <i class="fa-solid fa-heart @if ($is_liked) text-danger @else text-muted @endif"></i>
+                                            </div>
+                                            <span id="total-blog-likes" class="fw-semibold small text-muted">{{ $total_likes }}</span>
+                                        </div>
+                                    @endauth
+                                </div>
+                            </div>
+
                             <ul class="tags">
                                 @php
                                     $tags = $blog_details->keywords ? json_decode($blog_details->keywords, true) : [];
@@ -90,24 +135,25 @@
                                     }
                                 @endphp
                                 @foreach ($tags as $tag)
-                                    <li><a href="#">{{ ucfirst($tag) }}</a></li>
+                                    <li><a href="{{ route('blogs', ['search' => $tag]) }}">{{ ucfirst($tag) }}</a></li>
                                 @endforeach
                             </ul>
-                            @auth
-                                <div class="details-socialsLink d-flex justify-content-between">
-                                    <span>
-                                        @php
-                                            $is_liked = App\Models\BlogLike::where('blog_id', $blog_details->id)
-                                                ->where('user_id', auth()->user()->id)
-                                                ->first();
-                                        @endphp
-                                        <div class="like-svg @if ($is_liked) active @endif">
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M6.01026 17.0834V7.0626L10.5038 2.6732C10.7389 2.43816 10.9932 2.29419 11.2667 2.2413C11.5402 2.18841 11.7907 2.23276 12.0182 2.37432C12.2458 2.51588 12.406 2.73008 12.499 3.01693C12.5919 3.30379 12.5978 3.61495 12.5166 3.95041L11.7859 7.0626H17.1609C17.5711 7.0626 17.9386 7.22499 18.2634 7.54978C18.5882 7.87456 18.7506 8.24208 18.7506 8.65235V9.99847C18.7506 10.0859 18.7463 10.1796 18.7378 10.2796C18.7292 10.3796 18.7041 10.4659 18.6625 10.5385L16.2743 16.1324C16.1687 16.4128 15.9733 16.6413 15.6878 16.8182C15.4023 16.995 15.1044 17.0834 14.7942 17.0834H6.01026ZM7.3644 7.61547V15.7501H14.7346C14.7934 15.7501 14.8534 15.734 14.9149 15.702C14.9763 15.6699 15.0231 15.6165 15.0551 15.5417L17.4173 10.0626V8.65235C17.4173 8.57755 17.3933 8.51612 17.3452 8.46803C17.2971 8.41995 17.2357 8.39591 17.1609 8.39591H10.0808L11.1465 3.91193L7.3644 7.61547ZM3.67373 17.0834C3.23655 17.0834 2.8623 16.9277 2.55098 16.6164C2.23965 16.3051 2.08398 15.9308 2.08398 15.4936V8.65235C2.08398 8.21517 2.23965 7.84092 2.55098 7.5296C2.8623 7.21826 3.23655 7.0626 3.67373 7.0626H6.01026L6.03109 8.39591H3.67373C3.59894 8.39591 3.53751 8.41995 3.48942 8.46803C3.44134 8.51612 3.4173 8.57755 3.4173 8.65235V15.4936C3.4173 15.5684 3.44134 15.6299 3.48942 15.6779C3.53751 15.726 3.59894 15.7501 3.67373 15.7501H6.03109V17.0834H3.67373Z"
-                                                    fill="#6B7385" />
-                                            </svg>
-                                        </div>
+
+                            <!-- Edunexa Course CTA Banner -->
+                            <div class="card border-0 rounded-4 shadow-sm my-4 p-4 text-white text-center text-md-start" style="background: linear-gradient(135deg, #1e3a8a, #4338ca, #6366f1);">
+                                <div class="row align-items-center g-3">
+                                    <div class="col-md-8">
+                                        <h5 class="text-white fw-bold mb-1">Unataka Kujenga Ujuzi Zaidi na Cheti Rasmi? 🚀</h5>
+                                        <p class="text-white-50 mb-0" style="font-size: 13px;">Gundua kozi za vitendo kwenye Edunexa ukiwa na msaada wa mwalimu wa AI (AI Tutor) na vyeti vyenye QR Code vinavyotambulika.</p>
+                                    </div>
+                                    <div class="col-md-4 text-md-end">
+                                        <a href="{{ route('courses') }}" class="btn btn-warning text-dark fw-bold rounded-pill px-4 py-2 shadow-sm text-nowrap" style="font-size: 13px;">
+                                            Gundua Kozi Zote <i class="fa-solid fa-arrow-right ms-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                                         <span id="total-blog-likes">{{ $total_likes }}</span>
                                     </span>
                                 </div>

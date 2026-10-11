@@ -182,11 +182,23 @@
                                             </td>
 
                                             <td>
+                                                @if (!empty($payment->phone_on) || !empty($payment->bank_no))
+                                                    <div class="sub-title2 text-12px mb-1">
+                                                        @if(!empty($payment->phone_on))
+                                                            <div><strong>Simu:</strong> {{ $payment->phone_on }}</div>
+                                                        @endif
+                                                        @if(!empty($payment->bank_no))
+                                                            <div><strong>Muamala:</strong> <code class="text-primary">{{ $payment->bank_no }}</code></div>
+                                                        @endif
+                                                    </div>
+                                                @endif
                                                 @if ($payment->doc)
-                                                <a class="dropdown-item btn ol-btn-primary px-2 py-1" href="{{ route('admin.offline.payment.doc', $payment->id) }}"><i class="fi-rr-cloud-download"></i></a>
-                                                @else
-                                                    <span class="text-muted">-</span>
-                                                @endif {{ get_phrase('Download') }}</a>
+                                                    <a class="btn ol-btn-primary px-2 py-1 text-11px d-inline-flex align-items-center gap-1" href="{{ route('admin.offline.payment.doc', $payment->id) }}" target="_blank">
+                                                        <i class="fi-rr-cloud-download"></i> {{ get_phrase('Risiti') }}
+                                                    </a>
+                                                @elseif(empty($payment->phone_on) && empty($payment->bank_no))
+                                                    <span class="text-muted text-11px">-</span>
+                                                @endif
                                             </td>
 
                                             <td>

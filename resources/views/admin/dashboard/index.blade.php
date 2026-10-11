@@ -188,29 +188,65 @@
     <script>
         "use strict";
 
+        function getChartColors() {
+            const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+            return {
+                isDark: isDark,
+                text: isDark ? '#cbd5e1' : '#4b5675',
+                grid: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)',
+                border: isDark ? '#1e293b' : '#ffffff',
+                lineColor: '#1B84FF',
+                lineBg: isDark ? 'rgba(27, 132, 255, 0.18)' : 'rgba(27, 132, 255, 0.08)'
+            };
+        }
+
         const xValues = [0, "January", "February", "March", "April", "May", "June", "July", "August", "September",
             "October", "November", "December"
         ];
-        new Chart("myChart", {
+
+        let themeColors = getChartColors();
+
+        const revenueChart = new Chart("myChart", {
             type: "line",
             data: {
                 labels: xValues,
                 datasets: [{
                     label: "{{get_phrase('Admin revenue')}}",
-                    fill: false,
-                    lineTension: 0,
-                    backgroundColor: "rgba(0,0,255,1.0)",
-                    borderColor: "rgba(0,0,255,0.1)",
+                    fill: true,
+                    tension: 0.35,
+                    backgroundColor: themeColors.lineBg,
+                    borderColor: themeColors.lineColor,
+                    borderWidth: 2.5,
+                    pointBackgroundColor: themeColors.lineColor,
+                    pointBorderColor: themeColors.border,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
                     data: <?php print_r(json_encode($monthly_amount)); ?>
                 }]
             },
             options: {
-                legend: {
-                    display: true
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            color: themeColors.text,
+                            font: { family: 'Inter', size: 12, weight: '500' }
+                        }
+                    }
                 },
+                scales: {
+                    x: {
+                        grid: { color: themeColors.grid },
+                        ticks: { color: themeColors.text, font: { family: 'Inter', size: 11 } }
+                    },
+                    y: {
+                        grid: { color: themeColors.grid },
+                        ticks: { color: themeColors.text, font: { family: 'Inter', size: 11 } }
+                    }
+                }
             }
         });
-
 
         // Pie Chart 2
         const project_progress2 = document.getElementById('pie2');
@@ -218,15 +254,16 @@
             labels: ['Active', 'Upcoming', 'Pending', 'Private', 'Draft', 'Inactive'],
             data: [{{$active}}, {{$upcoming}}, {{$pending}}, {{$private}}, {{$draft}}, {{$inactive}}],
         };
-        var barColors = [
-            "#12c093",
-            "#1b84ff",
-            "#ff2583",
-            "#000",
-            "#878d97",
-            "#dadada",
+        const barColors = [
+            "#10b981", // Active (Emerald Green)
+            "#1b84ff", // Upcoming (Blue)
+            "#ec4899", // Pending (Pink)
+            "#8b5cf6", // Private (Vibrant Purple - stands out in both dark & light mode)
+            "#64748b", // Draft (Slate)
+            "#475569", // Inactive (Muted Slate)
         ];
-        new Chart(project_progress2, {
+
+        const courseStatusChart = new Chart(project_progress2, {
             type: 'doughnut',
             data: {
                 labels: progressData2.labels,
@@ -234,18 +271,45 @@
                     backgroundColor: barColors,
                     label: ' {{get_phrase("Courses")}}',
                     data: progressData2.data,
-                }, ],
+                    borderWidth: 3,
+                    borderColor: themeColors.border,
+                    hoverBorderColor: themeColors.border,
+                }],
             },
             options: {
                 responsive: true,
-                borderWidth: 5,
-                hoverBorderColor: '#fff',
+                cutout: '70%',
                 plugins: {
                     legend: {
                         display: false,
                     },
                 },
             },
+        });
+
+        // Live update charts on theme toggle
+        window.addEventListener('themeChanged', function() {
+            const updated = getChartColors();
+            revenueChart.data.datasets[0].backgroundColor = updated.lineBg;
+            revenueChart.data.datasets[0].pointBorderColor = updated.border;
+            if (revenueChart.options.plugins && revenueChart.options.plugins.legend) {
+                revenueChart.options.plugins.legend.labels.color = updated.text;
+            }
+            if (revenueChart.options.scales) {
+                if (revenueChart.options.scales.x) {
+                    revenueChart.options.scales.x.grid.color = updated.grid;
+                    revenueChart.options.scales.x.ticks.color = updated.text;
+                }
+                if (revenueChart.options.scales.y) {
+                    revenueChart.options.scales.y.grid.color = updated.grid;
+                    revenueChart.options.scales.y.ticks.color = updated.text;
+                }
+            }
+            revenueChart.update();
+
+            courseStatusChart.data.datasets[0].borderColor = updated.border;
+            courseStatusChart.data.datasets[0].hoverBorderColor = updated.border;
+            courseStatusChart.update();
         });
     </script>
 @endpush

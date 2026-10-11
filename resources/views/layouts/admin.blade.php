@@ -47,7 +47,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/backend/css/custom.css') }}">
 
     <script>(function(){try{var t=localStorage.getItem('theme');if(!t)t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-bs-theme',t)}catch(e){}})();</script>
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/backend/css/theme-admin.css') }}?v=1">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/backend/css/theme-admin.css') }}?v=2">
     @stack('css')
 
     <script type="text/javascript" src="{{ asset('assets/backend/js/jquery-3.7.1.min.js') }}"></script>
@@ -107,7 +107,7 @@
     @include('admin.toaster')
     @include('admin.common_scripts')
     @include('admin.init')
-    <script>(function(){var r=document.documentElement;document.addEventListener('click',function(e){if(!e.target.closest('[data-theme-toggle]'))return;var t=r.getAttribute('data-bs-theme')==='dark'?'light':'dark';r.setAttribute('data-bs-theme',t);try{localStorage.setItem('theme',t)}catch(x){}})})();</script>
+    <script>(function(){var r=document.documentElement;document.addEventListener('click',function(e){if(!e.target.closest('[data-theme-toggle]'))return;var t=r.getAttribute('data-bs-theme')==='dark'?'light':'dark';r.setAttribute('data-bs-theme',t);try{localStorage.setItem('theme',t)}catch(x){};window.dispatchEvent(new CustomEvent('themeChanged',{detail:{theme:t}}));})})();</script>
     @stack('js')
 </body>
 

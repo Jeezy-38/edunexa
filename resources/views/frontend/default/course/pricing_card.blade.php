@@ -96,8 +96,20 @@
                 {{ get_phrase($course_details->is_paid ? get_phrase('Buy Now') : get_phrase('Enroll Now')) }}</a>
         @endif
 
+        @php
+            $rawWa = get_settings('whatsapp_number') ?: (get_settings('phone') ?: '255712345678');
+            $cleanWa = preg_replace('/[^0-9]/', '', $rawWa);
+            if (str_starts_with($cleanWa, '0') && strlen($cleanWa) === 10) {
+                $cleanWa = '255' . substr($cleanWa, 1);
+            }
+            $courseWaMsg = urlencode("Habari Edunexa! Nahitaji maelezo zaidi kuhusu kozi hii: " . $course_details->title . " (" . url()->current() . ")");
+        @endphp
+        <a href="https://wa.me/{{ $cleanWa }}?text={{ $courseWaMsg }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-success w-100 d-flex align-items-center justify-content-center gap-2 mt-3 py-2 fw-semibold" style="border-radius: 8px; border-width: 1.5px; transition: all 0.25s ease;">
+            <i class="fa-brands fa-whatsapp fs-5"></i>
+            {{ get_phrase('Msaada / Uliza WhatsApp') }}
+        </a>
 
-        <ul class="ps-side-feature mt-2">
+        <ul class="ps-side-feature mt-4">
             <li class="d-flex justify-content-between align-items-center py-3 mb-0">
                 <span>
                     <img src="{{ asset('assets/frontend/default/image/m1.png') }}" alt="...">

@@ -19,6 +19,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::post('/update_watch_history', 'update_watch_history_with_duration')->name('update_watch_history');
     Route::any('/send_email_to_assigned_addresses', 'sendEmailToAssignedAddresses')->name('sendEmailToAssignedAddresses');
+    Route::get('/certificate/verify/{identifier}', 'verify_certificate')->name('certificate.verify');
 });
 
 // course page

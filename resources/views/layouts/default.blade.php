@@ -150,8 +150,8 @@
     @include('frontend.default.modal')
     <!-- toster file -->
     @include('frontend.default.toaster')
-    <!-- custom scripts -->
     @include('frontend.default.scripts')
+    @include('components.whatsapp_widget')
     @include('layouts.pwa_scripts')
     @stack('js')
 </body>

@@ -17,6 +17,20 @@
                         <a href="{{ route('courses') }}" class="eBtn gradient builder-editable" builder-identity="6">{{ get_phrase('Get Started') }}</a>
                         <a data-bs-toggle="modal" data-bs-target="#promoVideo" href="#" class="eBtn learn-btn"><i class="fa-solid fa-play"></i>{{ get_phrase('Learn More') }}</a>
                     </div>
+
+                    <!-- Edunexa Trust Highlights -->
+                    <div class="mt-4 pt-2 border-top d-flex flex-wrap align-items-center gap-3">
+                        <div class="d-flex align-items-center gap-1 text-warning" style="font-size: 13px;">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <span class="text-dark fw-bold ms-1" style="font-size: 13px;">4.9/5</span>
+                        </div>
+                        <span class="text-muted" style="font-size: 13px;">• {{ get_phrase('Vyeti vyenye QR Code') }}</span>
+                        <span class="text-muted" style="font-size: 13px;">• {{ get_phrase('Lipa kwa M-Pesa / Airtel / Tigo') }}</span>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-8 col-md-6 order-1 order-md-2">

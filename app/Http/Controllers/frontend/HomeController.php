@@ -55,7 +55,7 @@ class HomeController extends Controller
     {
         $certificate = Certificate::where('identifier', $identifier);
         if ($certificate->count() > 0) {
-            $qr_code_content_value = route('certificate', ['identifier' => $identifier]);
+            $qr_code_content_value = route('certificate.verify', ['identifier' => $identifier]);
             $qrcode                = QrCode::size(300)->generate($qr_code_content_value);
 
             $page_data['certificate'] = $certificate->first();
@@ -64,6 +64,30 @@ class HomeController extends Controller
         } else {
             return redirect(route('home'))->with('error', get_phrase('Certificate not found at this url'));
         }
+    }
+
+    public function verify_certificate($identifier)
+    {
+        $certificate = Certificate::where('identifier', $identifier)->first();
+        if (!$certificate) {
+            return view('frontend.default.certificate.verify', [
+                'isValid'    => false,
+                'identifier' => $identifier,
+            ]);
+        }
+
+        $course     = Course::find($certificate->course_id);
+        $user       = User::find($certificate->user_id);
+        $instructor = $course ? $course->creator : null;
+
+        return view('frontend.default.certificate.verify', [
+            'isValid'     => true,
+            'certificate' => $certificate,
+            'course'      => $course,
+            'user'        => $user,
+            'instructor'  => $instructor,
+            'identifier'  => $identifier,
+        ]);
     }
 
     public function update_watch_history_with_duration(Request $request)

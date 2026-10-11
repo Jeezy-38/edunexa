@@ -115,3 +115,13 @@ Route::controller(KnowledgeBaseTopicController::class)->group(function () {
 
 // select language
 Route::get('select/language/', [LanguageController::class, 'select_lng'])->name('select.lng');
+
+// Student Digital Portfolio / CV
+Route::get('u/{id}', [\App\Http\Controllers\frontend\PortfolioController::class, 'show'])->name('student.portfolio');
+
+// Career Hub & Fursa za Kazi
+Route::get('careers', [\App\Http\Controllers\frontend\CareerHubController::class, 'index'])->name('careers');
+Route::get('career/{id}', [\App\Http\Controllers\frontend\CareerHubController::class, 'details'])->name('career.details');
+
+// Student Project Showcase
+Route::get('showcase', [\App\Http\Controllers\student\StudentProjectController::class, 'showcase'])->name('showcase');

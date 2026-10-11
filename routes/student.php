@@ -147,6 +147,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post('tutor-review', 'tutor_review')->name('tutor_review');
     });
 
+    // student projects management
+    Route::controller(\App\Http\Controllers\student\StudentProjectController::class)->group(function () {
+        Route::get('my-projects', 'index')->name('my.projects');
+        Route::post('my-projects/store', 'store')->name('my.projects.store');
+        Route::get('my-projects/delete/{id}', 'delete')->name('my.projects.delete');
+    });
+
 });
 
 //Certificate download

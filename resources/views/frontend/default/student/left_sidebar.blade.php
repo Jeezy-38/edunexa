@@ -34,6 +34,21 @@
                     </a>
                 </li>
 
+                <li class="@if ($current_route == 'my.projects') active @endif">
+                    <a href="{{ route('my.projects') }}">
+                        <i class="fi-rr-folder-open text-20px me-3 ms-1" style="color: #6B7385;"></i>
+                        {{ get_phrase('Miradi Yangu') }}
+                    </a>
+                </li>
+
+                <li class="@if ($current_route == 'student.portfolio') active @endif">
+                    <a href="{{ route('student.portfolio', auth()->user()->id) }}" target="_blank">
+                        <i class="fi-rr-id-badge text-20px me-3 ms-1" style="color: #6B7385;"></i>
+                        {{ get_phrase('Wasifu wa Umma (CV)') }}
+                        <span class="badge bg-primary ms-auto" style="font-size: 10px;">Live</span>
+                    </a>
+                </li>
+
                 {{-- <li class="@if ($current_route == 'my.bootcamps' || $current_route == 'my.bootcamp.details' || $current_route == 'my.bootcamp.invoice') active @endif">
                     <a href="{{ route('my.bootcamps') }}">
                         <i class="fi-rr-video-camera text-23px me-3 ms-1"></i>

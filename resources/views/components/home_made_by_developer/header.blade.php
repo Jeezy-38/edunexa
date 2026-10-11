@@ -82,6 +82,17 @@
                             <li>
                                 <a href="{{ route('blogs') }}" class="@if (str_starts_with($current_route, 'blog')) active @endif">{{ get_phrase('Blog & Miongozo') }}</a>
                             </li>
+                            <li>
+                                <a href="{{ route('careers') }}" class="@if (str_starts_with($current_route, 'career')) active @endif">
+                                    {{ get_phrase('Fursa za Kazi') }}
+                                    <span class="badge bg-success ms-1" style="font-size: 9px; padding: 2px 5px;">Hiring</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('showcase') }}" class="@if ($current_route == 'showcase') active @endif">
+                                    {{ get_phrase('Miradi') }}
+                                </a>
+                            </li>
                             {{-- <li class="pe-2 ps-5"><a href="{{ route('bootcamps') }}" class="@if ($current_route == 'bootcamps' || $current_route == 'bootcamp.details') active @endif">{{ get_phrase('Bootcamp') }}</a></li> --}}
                             {{-- <li><a href="{{ route('team.packages') }}" class="@if ($current_route == 'team.packages' || $current_route == 'team.package.details') active @endif">{{ get_phrase('Team Training') }}</a></li> --}}
                             {{-- <li><a href="{{ route('tutor_list') }}" class="@if ($current_route == 'tutor_list') active @endif">{{ get_phrase('Find A Tutor') }}</a></li> --}}
@@ -214,6 +225,18 @@
                                             {{ get_phrase('My Profile') }}
                                         </a>
                                     </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('my.projects') }}">
+                                            <i class="fi-rr-folder-open text-18px me-2"></i>
+                                            {{ get_phrase('Miradi Yangu') }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('student.portfolio', auth()->user()->id) }}" target="_blank">
+                                            <i class="fi-rr-id-badge text-18px me-2"></i>
+                                            {{ get_phrase('Wasifu wa Umma (CV)') }}
+                                        </a>
+                                    </li>
 
 
                                     <li>
@@ -309,6 +332,8 @@
                                 $numberof_wishlist_item = App\Models\Wishlist::where('user_id', auth()->user()->id)->count();
                             @endphp
                             <li><a href="{{ route('my.courses') }}" class="btn btn-toggle-list d-inline-flex align-items-center text-16px fw-500 w-100 rounded border-0 py-3"> {{ get_phrase('My Courses') }}</a></li>
+                            <li><a href="{{ route('my.projects') }}" class="btn btn-toggle-list d-inline-flex align-items-center text-16px fw-500 w-100 rounded border-0 py-3"> {{ get_phrase('Miradi Yangu') }}</a></li>
+                            <li><a href="{{ route('student.portfolio', auth()->user()->id) }}" target="_blank" class="btn btn-toggle-list d-inline-flex align-items-center text-16px fw-500 w-100 rounded border-0 py-3"> {{ get_phrase('Wasifu wa Umma (CV)') }}</a></li>
                             <li><a href="{{ route('wishlist') }}" class="btn btn-toggle-list d-inline-flex align-items-center text-16px fw-500 w-100 rounded border-0 py-3"> {{ get_phrase('Wishlist') }} <span class="badge bg-pink ms-auto">{{ $numberof_wishlist_item }}</span></a></li>
                             <li><a href="{{ route('my.profile') }}" class="btn btn-toggle-list d-inline-flex align-items-center text-16px fw-500 w-100 rounded border-0 py-3"> {{ get_phrase('My profile') }}</a></li>
                             <li><a href="{{ route('message') }}" class="btn btn-toggle-list d-inline-flex align-items-center text-16px fw-500 w-100 rounded border-0 py-3"> {{ get_phrase('Message') }}</a></li>
@@ -343,6 +368,16 @@
                     <li>
                         <a href="{{ route('blogs') }}" class="btn btn-toggle-list d-inline-flex align-items-center text-16px fw-500 w-100 rounded border-0 py-3 @if (str_starts_with($current_route, 'blog')) text-primary @endif">
                             {{ get_phrase('Blog & Miongozo') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('careers') }}" class="btn btn-toggle-list d-inline-flex align-items-center text-16px fw-500 w-100 rounded border-0 py-3 @if (str_starts_with($current_route, 'career')) text-primary @endif">
+                            {{ get_phrase('Fursa za Kazi') }} <span class="badge bg-success ms-2">Hiring</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('showcase') }}" class="btn btn-toggle-list d-inline-flex align-items-center text-16px fw-500 w-100 rounded border-0 py-3 @if ($current_route == 'showcase') text-primary @endif">
+                            {{ get_phrase('Miradi ya Wanafunzi') }}
                         </a>
                     </li>
                     {{-- <li><a href="{{ route('bootcamps') }}" class="btn btn-toggle-list d-inline-flex align-items-center text-16px fw-500 w-100 rounded border-0 py-3">{{ get_phrase('Bootcamp') }}</a></li> --}}

@@ -1,7 +1,7 @@
 @extends('layouts.default')
-@push('title', ($user->name ?? 'Mwanafunzi') . ' - Wasifu wa Kidijitali (Portfolio) | Edunexa')
+@push('title', ($user->name ?? 'Student') . ' - ' . get_phrase('Digital Portfolio') . ' | Edunexa')
 @push('meta')
-    <meta name="description" content="Tazama wasifu wa kidijitali, miradi, na vyeti vilivyoidhinishwa vya {{ $user->name }} kutoka Edunexa.">
+    <meta name="description" content="View verified digital portfolio, projects, and credentials for {{ $user->name }} on Edunexa.">
 @endpush
 @push('css')
     <style>
@@ -57,13 +57,13 @@
                     </span>
                     <h2 class="text-white fw-bold mb-1">{{ $user->name }}</h2>
                     <p class="text-white-50 mb-0" style="font-size: 14px;">
-                        {{ $user->address ? $user->address . ' | ' : '' }} Wasifu Rasmi wa Kidijitali & Vyeti vya Umahiri
+                        {{ $user->address ? $user->address . ' | ' : '' }} {{ get_phrase('Official Digital Portfolio & Verified Credentials') }}
                     </p>
                 </div>
                 <div class="col-md-4 text-md-end mt-3 mt-md-0 no-print">
                     <button type="button" class="btn btn-light rounded-pill px-4 py-2 fw-semibold shadow-sm d-inline-flex align-items-center gap-2" onclick="window.print()">
                         <i class="fa-solid fa-print text-primary"></i>
-                        <span>{{ get_phrase('Pakua / Chapisha CV') }}</span>
+                        <span>{{ get_phrase('Download / Print CV') }}</span>
                     </button>
                 </div>
             </div>
@@ -83,7 +83,7 @@
 
                     <h4 class="fw-bold mb-1 text-dark">{{ $user->name }}</h4>
                     <p class="text-muted small mb-3">
-                        {{ $user->skills ? (is_array($skills) ? implode(' • ', array_slice($skills, 0, 3)) : '') : 'Mhitimu wa Edunexa' }}
+                        {{ $user->skills ? (is_array($skills) ? implode(' • ', array_slice($skills, 0, 3)) : '') : get_phrase('Edunexa Graduate') }}
                     </p>
 
                     <!-- Contact & Hire Action Buttons -->
@@ -94,18 +94,18 @@
                                 if (str_starts_with($cleanPhone, '0') && strlen($cleanPhone) === 10) {
                                     $cleanPhone = '255' . substr($cleanPhone, 1);
                                 }
-                                $msg = urlencode("Habari " . $user->name . "! Nimeona wasifu wako kwenye Edunexa Portfolio na ningependa kuwasiliana nawe kuhusu nafasi ya kazi/mradi.");
+                                $msg = urlencode("Hello " . $user->name . "! I viewed your verified Edunexa Portfolio and would like to connect regarding an opportunity.");
                             @endphp
                             <a href="https://wa.me/{{ $cleanPhone }}?text={{ $msg }}" target="_blank" class="btn btn-success rounded-pill fw-semibold py-2 d-flex align-items-center justify-content-center gap-2 shadow-2xs">
                                 <i class="fa-brands fa-whatsapp fs-5"></i>
-                                <span>{{ get_phrase('Wasiliana kwa WhatsApp') }}</span>
+                                <span>{{ get_phrase('Contact on WhatsApp') }}</span>
                             </a>
                         @endif
 
                         @if (!empty($user->email))
-                            <a href="mailto:{{ $user->email }}?subject={{ urlencode('Fursa ya Kazi / Mradi - Kutoka Edunexa Portfolio') }}" class="btn btn-outline-primary rounded-pill fw-semibold py-2 d-flex align-items-center justify-content-center gap-2">
+                            <a href="mailto:{{ $user->email }}?subject={{ urlencode('Career Opportunity - via Edunexa Portfolio') }}" class="btn btn-outline-primary rounded-pill fw-semibold py-2 d-flex align-items-center justify-content-center gap-2">
                                 <i class="fa-regular fa-envelope"></i>
-                                <span>{{ get_phrase('Tuma Barua Pepe') }}</span>
+                                <span>{{ get_phrase('Send Email') }}</span>
                             </a>
                         @endif
                     </div>
@@ -131,7 +131,7 @@
                 <div class="card border-0 shadow-sm rounded-4 p-4 mb-4 bg-white">
                     <h5 class="fw-bold mb-3 text-dark d-flex align-items-center gap-2" style="font-size: 16px;">
                         <i class="fa-solid fa-code text-primary"></i>
-                        {{ get_phrase('Ujuzi na Teknolojia (Skills)') }}
+                        {{ get_phrase('Skills & Technologies') }}
                     </h5>
                     @if (count($skills) > 0)
                         <div class="d-flex flex-wrap gap-2">
@@ -142,7 +142,7 @@
                             @endforeach
                         </div>
                     @else
-                        <p class="text-muted small mb-0">{{ get_phrase('Ujuzi bado haujaorodheshwa.') }}</p>
+                        <p class="text-muted small mb-0">{{ get_phrase('No skills listed yet.') }}</p>
                     @endif
                 </div>
 
@@ -150,19 +150,19 @@
                 <div class="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
                     <h5 class="fw-bold mb-3 text-dark d-flex align-items-center gap-2" style="font-size: 16px;">
                         <i class="fa-solid fa-chart-simple text-primary"></i>
-                        {{ get_phrase('Muhtasari wa Mafanikio') }}
+                        {{ get_phrase('Achievement Summary') }}
                     </h5>
                     <div class="row g-2 text-center">
                         <div class="col-6">
                             <div class="p-3 bg-light rounded-3">
                                 <div class="fs-4 fw-bold text-primary">{{ $completed_count }}</div>
-                                <div class="text-muted small">{{ get_phrase('Vyeti vya QR') }}</div>
+                                <div class="text-muted small">{{ get_phrase('QR Certificates') }}</div>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="p-3 bg-light rounded-3">
                                 <div class="fs-4 fw-bold text-success">{{ count($projects) }}</div>
-                                <div class="text-muted small">{{ get_phrase('Miradi ya Vitendo') }}</div>
+                                <div class="text-muted small">{{ get_phrase('Live Projects') }}</div>
                             </div>
                         </div>
                     </div>
@@ -175,7 +175,7 @@
                 <div class="card border-0 shadow-sm rounded-4 p-4 mb-4 bg-white">
                     <h5 class="fw-bold mb-3 text-dark d-flex align-items-center gap-2" style="font-size: 17px;">
                         <i class="fa-regular fa-user text-primary"></i>
-                        {{ get_phrase('Kuhusu Mhitimu (About Me)') }}
+                        {{ get_phrase('About Me') }}
                     </h5>
                     <div class="text-muted" style="font-size: 14px; line-height: 1.8;">
                         @if (!empty($user->biography))
@@ -183,7 +183,7 @@
                         @elseif(!empty($user->about))
                             {!! removeScripts($user->about) !!}
                         @else
-                            <p class="mb-0">Mwanafunzi aliyejituma anayeendelea kujenga ujuzi wa kidijitali na kitaalamu kupitia jukwaa la Edunexa.</p>
+                            <p class="mb-0">{{ get_phrase('Dedicated student acquiring practical digital skills and professional accreditation on the Edunexa platform.') }}</p>
                         @endif
                     </div>
                 </div>
@@ -193,9 +193,9 @@
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <h5 class="fw-bold mb-0 text-dark d-flex align-items-center gap-2" style="font-size: 17px;">
                             <i class="fa-solid fa-certificate text-warning"></i>
-                            {{ get_phrase('Vyeti Vilivyothibitishwa (Verified Certifications)') }}
+                            {{ get_phrase('Verified Certifications') }}
                         </h5>
-                        <span class="badge bg-warning text-dark rounded-pill px-3">{{ count($certificates) }} {{ get_phrase('Vyeti') }}</span>
+                        <span class="badge bg-warning text-dark rounded-pill px-3">{{ count($certificates) }} {{ get_phrase('Certificates') }}</span>
                     </div>
 
                     @if (count($certificates) > 0)
@@ -211,15 +211,15 @@
                                                 <small class="text-muted">{{ date('M Y', strtotime($cert->created_at)) }}</small>
                                             </div>
                                             <h6 class="fw-bold mb-1 text-dark" style="font-size: 14px;">
-                                                {{ $cert->course->title ?? 'Cheti cha Mafunzo' }}
+                                                {{ $cert->course->title ?? get_phrase('Certificate of Completion') }}
                                             </h6>
-                                            <small class="text-muted d-block mb-3">Namba: <code>{{ $cert->identifier }}</code></small>
+                                            <small class="text-muted d-block mb-3">ID: <code>{{ $cert->identifier }}</code></small>
                                         </div>
                                         <div class="d-flex align-items-center gap-2 pt-2 border-top no-print">
                                             <a href="{{ route('certificate.verify', $cert->identifier) }}" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill px-3 flex-grow-1" style="font-size: 11px;">
-                                                <i class="fa-solid fa-shield-halved me-1"></i> {{ get_phrase('Hakiki QR') }}
+                                                <i class="fa-solid fa-shield-halved me-1"></i> {{ get_phrase('Verify QR') }}
                                             </a>
-                                            <a href="{{ route('certificate', $cert->identifier) }}" class="btn btn-sm btn-light rounded-pill px-3" style="font-size: 11px;" title="{{ get_phrase('Pakua Cheti') }}">
+                                            <a href="{{ route('certificate', $cert->identifier) }}" class="btn btn-sm btn-light rounded-pill px-3" style="font-size: 11px;" title="{{ get_phrase('Download Certificate') }}">
                                                 <i class="fa-solid fa-download"></i>
                                             </a>
                                         </div>
@@ -229,7 +229,7 @@
                         </div>
                     @else
                         <div class="alert alert-light border rounded-3 p-3 text-center my-2 text-muted small">
-                            <i class="fa-solid fa-graduation-cap me-1"></i> Mwanafunzi yupo katika hatua ya kukamilisha kozi zake ili kupokea cheti.
+                            <i class="fa-solid fa-graduation-cap me-1"></i> {{ get_phrase('Student is currently progressing through courses to earn certified credentials.') }}
                         </div>
                     @endif
                 </div>
@@ -239,9 +239,9 @@
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <h5 class="fw-bold mb-0 text-dark d-flex align-items-center gap-2" style="font-size: 17px;">
                             <i class="fa-solid fa-laptop-code text-primary"></i>
-                            {{ get_phrase('Miradi Aliyotengeneza (Projects Showcase)') }}
+                            {{ get_phrase('Completed Projects (Showcase)') }}
                         </h5>
-                        <span class="badge bg-primary text-white rounded-pill px-3">{{ count($projects) }} {{ get_phrase('Miradi') }}</span>
+                        <span class="badge bg-primary text-white rounded-pill px-3">{{ count($projects) }} {{ get_phrase('Projects') }}</span>
                     </div>
 
                     @if (count($projects) > 0)
@@ -283,7 +283,7 @@
                         </div>
                     @else
                         <div class="alert alert-light border rounded-3 p-3 text-center my-2 text-muted small">
-                            <i class="fa-solid fa-folder-open me-1"></i> Bado hajaweka miradi ya umma.
+                            <i class="fa-solid fa-folder-open me-1"></i> {{ get_phrase('No public projects added yet.') }}
                         </div>
                     @endif
                 </div>

@@ -14,8 +14,7 @@
                     </h1>
                     <p class="builder-editable" builder-identity="5">{{ get_phrase("Join courses taught by experienced instructors. Study at your own pace, pay easily with M-Pesa, Tigo Pesa or Airtel Money, and earn a certificate when you finish.")}}</p>
                     <div class="banner-btn">
-                        <a href="{{ route('courses') }}" class="eBtn gradient builder-editable" builder-identity="6">{{ get_phrase('Get Started') }}</a>
-                        <a data-bs-toggle="modal" data-bs-target="#promoVideo" href="#" class="eBtn learn-btn"><i class="fa-solid fa-play"></i>{{ get_phrase('Learn More') }}</a>
+                        <a data-bs-toggle="modal" data-bs-target="#promoVideo" href="#" class="eBtn gradient d-inline-flex align-items-center gap-2 px-4 py-2" style="font-size: 15px;"><i class="fa-solid fa-play"></i>{{ get_phrase('Learn More') }}</a>
                     </div>
 
                     <!-- Edunexa Trust Highlights -->

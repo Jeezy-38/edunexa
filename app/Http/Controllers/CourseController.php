@@ -221,7 +221,7 @@ class CourseController extends Controller
         return redirect(route('admin.course.edit', ['id' => $course_id]))->with('success', get_phrase('Course added successfully'));
     }
 
-    public function edit($course_id = "", Request $request)
+    public function edit(Request $request, $course_id = "")
     {
 
         $data['course_details'] = Course::where('id', $course_id)->first();

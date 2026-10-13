@@ -154,11 +154,6 @@
                                 </div>
                             </div>
                         </div>
-                                        <span id="total-blog-likes">{{ $total_likes }}</span>
-                                    </span>
-                                </div>
-                            @endauth
-                        </div>
 
                         <div class="comment-wrap">
                             @include('frontend.default.blog.author_details')

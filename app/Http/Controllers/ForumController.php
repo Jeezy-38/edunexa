@@ -153,7 +153,7 @@ class ForumController extends Controller
         return redirect()->back();
     }
 
-    public static function rmv_item($arr = [], $user_id)
+    public static function rmv_item($arr, $user_id)
     {
         $pos = array_search($user_id, $arr);
         array_splice($arr, $pos, 1);
